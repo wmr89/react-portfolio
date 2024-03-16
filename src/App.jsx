@@ -1,5 +1,6 @@
-import './App.css';
+import "./App.css";
 import React from "react";
+import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Portfolio from "./components/Portfolio";
@@ -8,18 +9,19 @@ import Resume from "./components/Resume";
 import Footer from "./components/Footer";
 
 function App() {
-
   return (
-  
     <main>
-      <Navbar />
-      <About />
+      <Header />
+      <section>
+        <Navbar />
+        {/* <About />
       <Portfolio />
       <Contact />
-      <Resume />
+      <Resume />*/}
+      </section>
       <Footer />
     </main>
-  )
+  );
 }
 
-export default App
+export default App;
