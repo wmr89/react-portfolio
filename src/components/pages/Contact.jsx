@@ -1,23 +1,39 @@
 import React, { useState } from "react";
 import { validateEmail } from "../../utils/helpers";
 
+
+
 function Contact() {
   const [email, setEmail] = useState("");
-  const [userName, setUserName] = useState("");
+  const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [userNameError, setUserNameError] = useState("");
+  const [nameError, setNameError] = useState("");
   const [messageError, setMessageError] = useState("");
 
+  function encode(data) {
+    return Object.keys(data)
+      .map(
+        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+      )
+      .join("&");
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    
+  }
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
     if (name === "email") {
       setEmail(value);
-      setEmailError(validateEmail(value) ? "" : "Please enter a valid email address");
-    } else if (name === "userName") {
-      setUserName(value);
-      setUserNameError(value ? "" : "Name is required");
+      setEmailError(
+        validateEmail(value) ? "" : "Please enter a valid email address"
+      );
+    } else if (name === "name") {
+      setName(value);
+      setNameError(value ? "" : "Name is required");
     } else {
       setMessage(value);
       setMessageError(value ? "" : "Message is required");
@@ -29,8 +45,8 @@ function Contact() {
 
     if (name === "email") {
       setEmailError(value ? "" : "Email is required");
-    } else if (name === "userName") {
-      setUserNameError(value ? "" : "Name is required");
+    } else if (name === "name") {
+      setNameError(value ? "" : "Name is required");
     } else {
       setMessageError(value ? "" : "Message is required");
     }
@@ -42,21 +58,27 @@ function Contact() {
     if (!validateEmail(email)) {
       setEmailError("Please enter a valid email address");
     }
-    if (!userName) {
-      setUserNameError("Name is required");
+    if (!name) {
+      setNameError("Name is required");
     }
     if (!message) {
       setMessageError("Message is required");
     }
 
     // Submit the form if there are no errors
-    if (!emailError && !userNameError && !messageError) {
+    if (!emailError && !nameError && !messageError) {
       // Clear errors and submit the form
       setEmailError("");
-      setUserNameError("");
+      setNameError("");
       setMessageError("");
-      
-      // Your form submission logic goes here
+    // Your form submission logic goes here
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": "contact", name, email, message }),
+      })
+        .then(() => alert("Message sent!"))
+        .catch((error) => alert(error));
     }
   };
 
@@ -76,19 +98,21 @@ function Contact() {
                 className={`form-control ${emailError && "is-invalid"}`}
                 placeholder="Email"
               />
-              {emailError && <div className="invalid-feedback">{emailError}</div>}
+              {emailError && (
+                <div className="invalid-feedback">{emailError}</div>
+              )}
             </div>
             <div className="mb-3">
               <input
-                value={userName}
-                name="userName"
+                value={name}
+                name="name"
                 onChange={handleInputChange}
                 onBlur={handleBlur}
                 type="text"
-                className={`form-control ${userNameError && "is-invalid"}`}
+                className={`form-control ${nameError && "is-invalid"}`}
                 placeholder="Name"
               />
-              {userNameError && <div className="invalid-feedback">{userNameError}</div>}
+              {nameError && <div className="invalid-feedback">{nameError}</div>}
             </div>
             <div className="mb-3">
               <textarea
@@ -100,7 +124,9 @@ function Contact() {
                 rows="5"
                 placeholder="Message"
               ></textarea>
-              {messageError && <div className="invalid-feedback">{messageError}</div>}
+              {messageError && (
+                <div className="invalid-feedback">{messageError}</div>
+              )}
             </div>
             <button type="submit" className="btn btn-primary">
               Submit
