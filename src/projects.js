@@ -1,3 +1,5 @@
+{/* store data for portfolio projects here to be able to switch them out easily */}
+
 const projects = [
   {
     title: "Currency Converter",

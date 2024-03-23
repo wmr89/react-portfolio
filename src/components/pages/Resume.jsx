@@ -27,11 +27,13 @@ function Resume() {
       <div className="column justify-content-center">
         <div className="col-md-6 text-center">
           <h2 className="text-center">Resume</h2>
+          {/*add link and reference for downloading resume*/}
           <a href="/images/CV_William_Rankin.pdf" download>
             <button className="btn btn-primary mt-3">Download Resume</button>
           </a>
         </div>
         <div className="col-md-6 text-center mt-3">
+          {/*embed pdf of resume*/}
           <embed
             src="/images/CV_William_Rankin.pdf"
             width="100%"

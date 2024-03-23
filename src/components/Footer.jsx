@@ -6,13 +6,13 @@ function Footer() {
       <div className="container">
         <ul className="list-unstyled d-flex justify-content-around mb-0">
           <li>
-            <a href="https://github.com/wmr89" className="text-white text-decoration-none">Github</a> {/* Added text-decoration-none class */}
+            <a href="https://github.com/wmr89" className="text-white text-decoration-none">Github</a>
           </li>
           <li>
-            <a href="https://www.linkedin.com/in/wmrankin/" className="text-white text-decoration-none">LinkedIn</a> {/* Added text-decoration-none class */}
+            <a href="https://www.linkedin.com/in/wmrankin/" className="text-white text-decoration-none">LinkedIn</a>
           </li>
           <li>
-            <a href="https://stackexchange.com/users/30818272/wmr" className="text-white text-decoration-none">Stack Overflow</a> {/* Added text-decoration-none class */}
+            <a href="https://stackexchange.com/users/30818272/wmr" className="text-white text-decoration-none">Stack Overflow</a>
           </li>
         </ul>
       </div>

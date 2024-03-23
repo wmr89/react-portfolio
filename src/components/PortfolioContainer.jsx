@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+{/*import each page needed*/}
 import Navbar from "./Navbar";
 import About from "./pages/About";
 import Portfolio from "./pages/Portfolio";
@@ -9,7 +9,7 @@ import projects from '../projects';
 
 export default function PortfolioContainer() {
     const [currentPage, setCurrentPage] = useState('About');
-
+{/*add conditions for rendering the page that matches 'current page', about set as default page*/}
     const renderPage = () => {
         if (currentPage === 'About') {
           return <About />;

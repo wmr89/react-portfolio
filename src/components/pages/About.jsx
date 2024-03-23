@@ -10,7 +10,7 @@ function About() {
               <h2 className="card-title">About Me</h2>
               <img
                 src="/images/react.svg"
-                alt="Your Photo"
+                alt="Photo Photo"
                 className="card-img-top mx-auto d-block"
                 style={{ width: '150px', height: '150px' }}
               />
