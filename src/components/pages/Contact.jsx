@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { validateEmail } from "../../utils/helpers";
 
+
+
 function Contact() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -9,12 +11,15 @@ function Contact() {
   const [nameError, setNameError] = useState("");
   const [messageError, setMessageError] = useState("");
 
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
     if (name === "email") {
       setEmail(value);
-      setEmailError(validateEmail(value) ? "" : "Please enter a valid email address");
+      setEmailError(
+        validateEmail(value) ? "" : "Please enter a valid email address"
+      );
     } else if (name === "name") {
       setName(value);
       setNameError(value ? "" : "Name is required");
@@ -36,28 +41,30 @@ function Contact() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
 
     if (!validateEmail(email)) {
       setEmailError("Please enter a valid email address");
-      return;
     }
     if (!name) {
       setNameError("Name is required");
-      return;
     }
     if (!message) {
       setMessageError("Message is required");
-      return;
     }
-
-    // Your form submission logic goes here
-
-    // Reset form fields after successful submission
-    setEmail("");
-    setName("");
-    setMessage("");
+    if (!emailError && !nameError && !messageError) {
+      setEmailError("");
+      setNameError("");
+      setMessageError("");
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({ "form-name": "contact", name, email, message }),
+      })
+        .then(() => alert("Message sent!"))
+        .catch((error) => alert(error));
+    }
   };
 
   return (
@@ -65,7 +72,12 @@ function Contact() {
       <div className="row justify-content-center">
         <div className="col-md-6">
           <h1 className="text-center mb-4">Contact Me</h1>
-          <form className="mb-4" onSubmit={handleSubmit} netlify>
+          <h4 className="text-center mb-4">This form is not fully functional yet</h4>
+          <h4 className="text-center mb-4" >Contact me at:</h4>
+          <ul className="text-center mb-4 list-unstyled">
+            <li><a href="mailto:william.rankin01@gmail.com">william.rankin01@gmail.com</a></li>
+          </ul>
+          <form className="mb-4" onSubmit={handleFormSubmit}>
             <div className="mb-3">
               <input
                 value={email}
@@ -76,7 +88,9 @@ function Contact() {
                 className={`form-control ${emailError && "is-invalid"}`}
                 placeholder="Email"
               />
-              {emailError && <div className="invalid-feedback">{emailError}</div>}
+              {emailError && (
+                <div className="invalid-feedback">{emailError}</div>
+              )}
             </div>
             <div className="mb-3">
               <input
@@ -100,7 +114,9 @@ function Contact() {
                 rows="5"
                 placeholder="Message"
               ></textarea>
-              {messageError && <div className="invalid-feedback">{messageError}</div>}
+              {messageError && (
+                <div className="invalid-feedback">{messageError}</div>
+              )}
             </div>
             <button type="submit" className="btn btn-primary">
               Submit

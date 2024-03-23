@@ -1,6 +1,6 @@
 function Portfolio(props) {
   return (
-    <div className="container py-4">
+    <div className="container mb-5 py-4">
       <h2 className="mb-4">Portfolio</h2>
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {/*map projects with an idex as the key, for each project  the HTML below will be added*/}
