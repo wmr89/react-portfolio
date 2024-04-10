@@ -2,6 +2,14 @@
 
 const projects = [
   {
+    title: "Textbook Exchange",
+    subtitle: "MERN Stack GraphQL",
+    description: "Peer-to-peer e-commerce site",
+    image: "/images/textbook_exchange.jpg",
+    link: "https://textbook-trade.onrender.com/",
+    github: "https://github.com/camillebagnani/textbook-trade",
+  },
+  {
     title: "Currency Converter",
     subtitle: "JavaScript Express.js Node.js MySQL",
     description: "Simple app to calculate currency exchanges",
